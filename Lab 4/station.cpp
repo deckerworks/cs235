@@ -234,6 +234,8 @@ bool station::is_not_dupe(int id) {
 		cout << "That is not a unique ID. ID contained in DEQUE" << endl;
 		return !deque.contains(id);
 	}
+
+	return true;
 };
 
 #endif
