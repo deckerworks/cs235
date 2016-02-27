@@ -1,5 +1,7 @@
+//#pragma once
 #include <iostream>
 #include <string>
+#include "station.h"
 
 using namespace std;
 
@@ -7,6 +9,8 @@ int main() {
 
 	int menu_item;
 	bool menu_display = true;
+	
+	station* train_station = new station();
 
 	while (menu_display) {
 
@@ -26,12 +30,27 @@ int main() {
 		cin >> menu_item;
 
 		switch (menu_item) {
-			case 1: cout << "ITEM 1\n" << endl; break;
+			case 1: 
+				int train_id;
+				
+				cout << "Please enter a train ID Greater than 0: ";
+				cin >> train_id;
+				
+				break;
 			case 2: cout << "ITEM 2\n" << endl; break;
 			case 3: cout << "ITEM 3\n" << endl; break;
 			case 4: cout << "ITEM 4\n" << endl; break;
 			case 5: cout << "ITEM 5\n" << endl; break;
-			case 6: cout << "ITEM 6: GOODBYE\n" << endl; menu_display = false; break;
+			case 6: 
+				cout << "\nChoo choo ciao!\n" << endl; 
+				cout << "    ~~~ ____                           " << endl;
+				cout << " __||___|  |  ______   ______   ______ " << endl;
+  				cout << "(        | |      | |      | |      |" << endl;
+  				cout << "/-()---() ~ ()--() ~ ()--() ~ ()--()" << endl;
+  				cout << "-------------------------------------------" << endl;
+				
+				menu_display = false;
+				break;
 			default: cout << "Please enter a valid selection" << endl;
 
 			cin.clear();

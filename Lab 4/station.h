@@ -1,14 +1,11 @@
-#ifndef STATION_H_
-#define STATION_H_
-
 #include "StationInterface.h"
 #include "l_deque.h"
 
 class station : public StationInterface
 {
 public:
-	station();
-	virtual ~station();
+	station() : current_car(NCAR) {};
+	virtual ~station(){};
 	//Part 1--------------------------------------------------------------
 	/**
 	* Let another car arrive at the station and become the current car.
@@ -57,5 +54,3 @@ private:
 	bool is_not_dupe(int id);
 
 };
-
-#endif

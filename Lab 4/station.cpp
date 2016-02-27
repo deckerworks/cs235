@@ -1,3 +1,6 @@
+#ifndef STATION_H_
+#define STATION_H_
+
 #include "station.h"
 #include "l_deque.h"
 
@@ -232,3 +235,5 @@ bool station::is_not_dupe(int id) {
 		return !deque.contains(id);
 	}
 };
+
+#endif
