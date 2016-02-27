@@ -119,6 +119,14 @@ public:
 	int Capacity() {
 		return capacity;
 	}
+	
+	T show_left () {
+		return front->data;
+	}
+	
+	T show_right() {
+		return back->data;
+	}
 
 
 private:

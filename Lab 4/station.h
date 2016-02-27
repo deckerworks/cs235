@@ -22,7 +22,7 @@ public:
 	*/
 	virtual bool addToStation(int car);
 	virtual int showCurrentCar();
-	virtual bool removeFromStation(int car);
+	virtual bool removeFromStation();
 
 	//Part 2--------------------------------------------------------------
 	virtual bool addToStack();
