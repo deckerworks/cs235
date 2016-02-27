@@ -13,10 +13,12 @@ bool station::addToStation(int car) {
 	
 	if (current_car == NCAR && is_not_dupe(car) ) {
 		current_car = car;
+		cout << "Train successfully made it to the station!" << endl;
 		return true;
 		
 	}
 	else {
+		cout << "There is already a train in the station" << endl;
 		return false;
 	}
 };
@@ -33,9 +35,11 @@ bool station::removeFromStation() {
 	
 	if (current_car != NCAR) {
 		current_car = NCAR;
+		cout << "Car successfully left the Station!" << endl;
 		return true;
 	}
 	else {
+		cout << "Station is already empty!" << endl;
 		return false;
 	}
 };

@@ -9,6 +9,7 @@ int main() {
 
 	int menu_item;
 	bool menu_display = true;
+	string twoend;
 	
 	station* train_station = new station();
 
@@ -45,8 +46,51 @@ int main() {
 				cin.clear();
 				
 				break;
-			case 2: cout << "ITEM 2\n" << endl; break;
-			case 3: cout << "ITEM 3\n" << endl; break;
+			case 2:
+				train_station->removeFromStation();
+				break;
+			case 3: 
+				int storage;
+				cout << "What storage facility do you want to store the train in?" << endl;
+				cout << "1: Stack" << endl;
+				cout << "2: Deque" << endl;
+				cout << "3: Queue" << endl;
+				
+				cin >> storage;
+				
+				if(!cin.fail() && storage > 0) {
+					switch(storage){
+						
+						case 1: 
+							train_station->addToStack(); 
+							break;
+						case 2: 
+							
+							cout << "Which end of the Deque? L/R";
+							cin >> twoend;
+							if (twoend == "L")
+								train_station->addToDequeLeft();
+							else if (twoend == "R")
+								train_station->addToDequeRight();
+							else
+								cout << "invalid position" << endl;
+							break;
+						case 3: 
+							train_station->addToQueue(); 
+							break;
+						default: 
+							cout << "invalid selection!" << endl;
+					}
+					cin.ignore(100000, '\n');
+					cin.clear();
+				}
+				else {
+					cout << "INVALID ID" << endl;
+				}
+				cin.ignore(100000, '\n');
+				cin.clear();
+				
+				break;
 			case 4: cout << "ITEM 4\n" << endl; break;
 			case 5:
 				cout << "Accessable cars: " << endl;
@@ -68,7 +112,7 @@ int main() {
 				if (train_station->showCurrentCar() == -1)
 					cout << "Station: empty" << endl;
 				else
-					cout << "Station :" << train_station->showCurrentCar() << endl;
+					cout << "Station: " << train_station->showCurrentCar() << endl;
 				
 				
 				break;
