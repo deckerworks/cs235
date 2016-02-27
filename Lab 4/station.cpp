@@ -49,13 +49,14 @@ bool station::addToStack() {
 	//we will only be using the left_functions for the stacks
 	//cout << "Attempting to add --" << car << "-- to stack" << endl;
 	
-	if (current_car == NCAR){
-		cout << "NO CAR ADDED--STATION EMPTY" << endl;
+	if (current_car == NCAR || stack.Capacity() == 6){
+		cout << "Station empty or STACK full!" << endl;
+		//cout << "NO CAR ADDED--STATION EMPTY" << endl;
 		return false;
 	}
 	else {
 		stack.enqueue_left(current_car);
-		cout << "CURRENT CAR ADDED TO STACK" << endl;
+		//cout << "CURRENT CAR ADDED TO STACK" << endl;
 		current_car = NCAR;
 		return true;
 	}
@@ -67,6 +68,7 @@ bool station::removeFromStack() {
 	//cout << "Attempting to remove --" << car << "-- from stack" << endl;
 	
 	if (stack.Capacity() == 0 || current_car != NCAR){
+		cout << "STACK IS EMPTY" << endl;
 		return false;
 	}
 	else {
@@ -97,8 +99,10 @@ int station::showSizeOfStack() {
 //Part 3--------------------------------------------------------------
 bool station::addToQueue() {
 	
-	if (current_car == NCAR )
+	if (current_car == NCAR || queue.Capacity() == 6){
+		cout << "Station empty or QUEUE full!" << endl;
 		return false;
+	}
 	else {
 		queue.enqueue_left(current_car);
 		current_car = NCAR;
@@ -109,8 +113,10 @@ bool station::addToQueue() {
 
 bool station::removeFromQueue() {
 	
-	if (queue.Capacity() == 0 || current_car != NCAR)
+	if (queue.Capacity() == 0 || current_car != NCAR){
+		cout << "QUEUE IS EMPTY" << endl;
 		return false;
+	}
 	else {
 		current_car = queue.show_right();
 		queue.dequeue_right();
@@ -142,8 +148,10 @@ int station::showSizeOfQueue() {
 
 bool station::addToDequeLeft() {
 	
-	if (current_car == NCAR)
+	if (current_car == NCAR || deque.Capacity() == 8){
+		cout << "Station empty or DEQUE full!" << endl;
 		return false;
+	}
 	else {
 		deque.enqueue_left(current_car);
 		current_car = NCAR;
@@ -154,8 +162,10 @@ bool station::addToDequeLeft() {
 
 bool station::addToDequeRight() {
 	
-	if (current_car == NCAR)
+	if (current_car == NCAR || deque.Capacity() == 8){
+		cout << "Station empty or DEQUE full!" << endl;
 		return false;
+	}
 	else {
 		deque.enqueue_right(current_car);
 		current_car = NCAR;
@@ -167,8 +177,10 @@ bool station::addToDequeRight() {
 
 bool station::removeFromDequeLeft() {
 	
-	if (deque.Capacity() == 0 || current_car != NCAR)
+	if (deque.Capacity() == 0 || current_car != NCAR){
+		cout << "DEQUE IS EMPTY" << endl;
 		return false;
+	}
 	else {
 		current_car = deque.show_left();
 		deque.dequeue_left();
@@ -180,8 +192,10 @@ bool station::removeFromDequeLeft() {
 
 bool station::removeFromDequeRight() {
 	
-	if (deque.Capacity() == 0 || current_car != NCAR)
+	if (deque.Capacity() == 0 || current_car != NCAR){
+		cout << "DEQUE IS EMPTY" << endl;
 		return false;
+	}
 	else {
 		current_car = deque.show_right();
 		deque.dequeue_right();

@@ -57,7 +57,7 @@ int main() {
 				cout << "2: Deque left" << endl;
 				cout << "3: Deque right" << endl;
 				cout << "4: Queue" << endl;
-				
+				cout << "Selection: ";
 				cin >> storage;
 
 					switch(storage){
@@ -82,12 +82,12 @@ int main() {
 				
 				break;
 			case 4: 
-				//int storage;
 				cout << "Where are we removing the train from?" << endl;
 				cout << "1: Stack" << endl;
 				cout << "2: Deque left" << endl;
 				cout << "3: Deque right" << endl;
 				cout << "4: Queue" << endl;
+				cout << "Selection: ";
 				
 				cin >> storage;
 				
