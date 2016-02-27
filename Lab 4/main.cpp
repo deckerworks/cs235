@@ -35,12 +35,43 @@ int main() {
 				
 				cout << "Please enter a train ID Greater than 0: ";
 				cin >> train_id;
+				if(!cin.fail() && train_id > 0) {
+					train_station->addToStation(train_id);
+				}
+				else {
+					cout << "INVALID ID" << endl;
+				}
+				cin.ignore(100000, '\n');
+				cin.clear();
 				
 				break;
 			case 2: cout << "ITEM 2\n" << endl; break;
 			case 3: cout << "ITEM 3\n" << endl; break;
 			case 4: cout << "ITEM 4\n" << endl; break;
-			case 5: cout << "ITEM 5\n" << endl; break;
+			case 5:
+				cout << "Accessable cars: " << endl;
+				if (train_station->showSizeOfStack() == 0)
+					cout << "Stack: empty" << endl;
+				else
+					cout << "Stack: " << train_station->showTopOfStack() << endl;
+				
+				if (train_station->showSizeOfDeque() == 0) 
+					cout << "Deque: empty, empty" << endl;
+				else
+					cout << "Deque: " << train_station->showTopOfDequeLeft() << ", " << train_station->showTopOfDequeRight() << endl;
+				
+				if (train_station->showSizeOfQueue() == 0)
+					cout << "Queue: empty" << endl;
+				else
+					cout << "Queue: " << train_station->showTopOfQueue() << endl;
+					
+				if (train_station->showCurrentCar() == -1)
+					cout << "Station: empty" << endl;
+				else
+					cout << "Station :" << train_station->showCurrentCar() << endl;
+				
+				
+				break;
 			case 6: 
 				cout << "\nChoo choo ciao!\n" << endl; 
 				cout << "    ~~~ ____                           " << endl;

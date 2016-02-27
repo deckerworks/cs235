@@ -11,7 +11,7 @@ bool station::addToStation(int car) {
 	
 	cout << "attempting to add car --" << car << "-- to station" << endl;
 	
-	if (current_car == NCAR && car >= 0 && is_not_dupe(car) ) {
+	if (current_car == NCAR && is_not_dupe(car) ) {
 		current_car = car;
 		return true;
 		
@@ -220,17 +220,17 @@ bool station::is_not_dupe(int id) {
 	bool unique;
 
 	// Check all three containers
-	if( !stack.contains(id)){
+	if(stack.contains(id)){
 		cout << "That is not a unique ID. ID contained in STACK" << endl;
 		return !stack.contains(id);
 	}
 
-	if (!queue.contains(id)) {
+	if (queue.contains(id)) {
 		cout << "That is not a unique ID. ID contained in QUEUE" << endl;
 		return !queue.contains(id);
 	}
 
-	if (!deque.contains(id)) {
+	if (deque.contains(id)) {
 		cout << "That is not a unique ID. ID contained in DEQUE" << endl;
 		return !deque.contains(id);
 	}
