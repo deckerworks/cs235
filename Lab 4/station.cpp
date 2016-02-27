@@ -18,7 +18,7 @@ bool station::addToStation(int car) {
 		
 	}
 	else {
-		cout << "There is already a train in the station" << endl;
+		cout << "Train Not added to station" << endl;
 		return false;
 	}
 };

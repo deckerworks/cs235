@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include "station.h"
+#include "Factory.h"
 
 using namespace std;
 
@@ -9,9 +10,9 @@ int main() {
 
 	int menu_item;
 	bool menu_display = true;
-	string twoend;
-	
-	station* train_station = new station();
+	StationInterface* train_station = Factory::createStation();	
+		
+	//station* train_station = new station();
 
 	while (menu_display) {
 
@@ -53,45 +54,66 @@ int main() {
 				int storage;
 				cout << "What storage facility do you want to store the train in?" << endl;
 				cout << "1: Stack" << endl;
-				cout << "2: Deque" << endl;
-				cout << "3: Queue" << endl;
+				cout << "2: Deque left" << endl;
+				cout << "3: Deque right" << endl;
+				cout << "4: Queue" << endl;
 				
 				cin >> storage;
-				
-				if(!cin.fail() && storage > 0) {
+
 					switch(storage){
 						
 						case 1: 
 							train_station->addToStack(); 
 							break;
 						case 2: 
-							
-							cout << "Which end of the Deque? L/R";
-							cin >> twoend;
-							if (twoend == "L")
-								train_station->addToDequeLeft();
-							else if (twoend == "R")
-								train_station->addToDequeRight();
-							else
-								cout << "invalid position" << endl;
+							train_station->addToDequeLeft();
+						case 3:
+							train_station->addToDequeRight();
 							break;
-						case 3: 
+						case 4: 
 							train_station->addToQueue(); 
 							break;
 						default: 
 							cout << "invalid selection!" << endl;
+					
+					cin.ignore(100000, '\n');
+					cin.clear();
 					}
+				
+				break;
+			case 4: 
+				//int storage;
+				cout << "Where are we removing the train from?" << endl;
+				cout << "1: Stack" << endl;
+				cout << "2: Deque left" << endl;
+				cout << "3: Deque right" << endl;
+				cout << "4: Queue" << endl;
+				
+				cin >> storage;
+				
+				switch(storage){
+					
+					case 1: 
+						train_station->removeFromStack();
+						break;
+					case 2:
+						train_station->removeFromDequeLeft();
+						break;
+					case 3:
+						train_station->removeFromDequeRight();
+						break;
+					case 4:
+						train_station->removeFromQueue();
+						break;
+					default:
+						cout << "Invalid selection!" << endl;
+					
 					cin.ignore(100000, '\n');
 					cin.clear();
 				}
-				else {
-					cout << "INVALID ID" << endl;
-				}
-				cin.ignore(100000, '\n');
-				cin.clear();
-				
+			
 				break;
-			case 4: cout << "ITEM 4\n" << endl; break;
+
 			case 5:
 				cout << "Accessable cars: " << endl;
 				if (train_station->showSizeOfStack() == 0)
