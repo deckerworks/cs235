@@ -43,7 +43,7 @@ int main() {
 				else {
 					cout << "INVALID ID" << endl;
 				}
-				cin.ignore(100000, '\n');
+				//cin.ignore(100000, '\n');
 				cin.clear();
 				
 				break;
@@ -157,6 +157,11 @@ int main() {
 		cin.ignore(100000, '\n');
 	}
 	
+	//train_station->deque.erase();
+	//train_station->queue.erase();
+	//train_station->stack.erase();
+	
+	delete train_station;
 
 	return 0;
 	

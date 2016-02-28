@@ -5,7 +5,11 @@ class station : public StationInterface
 {
 public:
 	station() : current_car(NCAR) {};
-	virtual ~station(){};
+	virtual ~station(){
+		stack.erase();
+		deque.erase();
+		queue.erase();
+	};
 	//Part 1--------------------------------------------------------------
 	/**
 	* Let another car arrive at the station and become the current car.
