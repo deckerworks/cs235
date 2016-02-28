@@ -150,10 +150,13 @@ int main() {
 				break;
 			default: cout << "Please enter a valid selection" << endl;
 
-			cin.clear();
-			cin.ignore(100000);
+			
 		}
+		
+		cin.clear();
+		cin.ignore(100000, '\n');
 	}
+	
 
 	return 0;
 	
