@@ -130,7 +130,7 @@ int station::showTopOfQueue() {
 		return NCAR;
 	}
 	else {
-		return queue.show_right();
+		return queue.show_left();
 	}
 	
 };
