@@ -42,6 +42,7 @@ public:
 				node* temp = tail;
 				tail = temp->prev;
 				tail = NULL;
+				head = NULL;
 				delete temp;
 			}
 			else{
@@ -60,6 +61,7 @@ public:
 				node* temp = head;
 				head = temp->next;
 				head = NULL;
+				tail = NULL;
 				delete temp;
 			}
 			else{
