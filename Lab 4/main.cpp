@@ -116,7 +116,7 @@ int main() {
 					
 				}
 				else {
-					cout << "The station already has a car!" << endl;
+					cout << "The station already has a car, or invalid ID entered!" << endl;
 					break;
 				}
 				cin.clear();
