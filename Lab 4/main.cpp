@@ -47,9 +47,11 @@ int main() {
 				cin.clear();
 				
 				break;
+
 			case 2:
 				train_station->removeFromStation();
 				break;
+
 			case 3: 
 				int storage;
 				cout << "What storage facility do you want to store the train in?" << endl;
@@ -67,6 +69,7 @@ int main() {
 							break;
 						case 2: 
 							train_station->addToDequeLeft();
+							break;
 						case 3:
 							train_station->addToDequeRight();
 							break;
@@ -81,6 +84,7 @@ int main() {
 					}
 				
 				break;
+
 			case 4: 
 				int id;
 				cout << "What car would you like to remove? ";
@@ -115,42 +119,10 @@ int main() {
 					cout << "The station already has a car!" << endl;
 					break;
 				}
+				cin.clear();
+				cin.ignore(10000, '\n');
 				
 				break;
-				
-				/*
-				cout << "Where are we removing the train from?" << endl;
-				cout << "1: Stack" << endl;
-				cout << "2: Deque left" << endl;
-				cout << "3: Deque right" << endl;
-				cout << "4: Queue" << endl;
-				cout << "Selection: ";
-				
-				cin >> storage;
-				
-				switch(storage){
-					
-					case 1: 
-						train_station->removeFromStack();
-						break;
-					case 2:
-						train_station->removeFromDequeLeft();
-						break;
-					case 3:
-						train_station->removeFromDequeRight();
-						break;
-					case 4:
-						train_station->removeFromQueue();
-						break;
-					default:
-						cout << "Invalid selection!" << endl;
-					
-					cin.ignore(100000, '\n');
-					cin.clear();
-				}
-			
-				break;
-				*/
 
 			case 5:
 				cout << "Accessable cars: " << endl;
@@ -173,9 +145,8 @@ int main() {
 					cout << "Station: empty" << endl;
 				else
 					cout << "Station: " << train_station->showCurrentCar() << endl;
-				
-				
 				break;
+
 			case 6: 
 				cout << "\nChoo choo ciao!\n" << endl; 
 				cout << "    ~~~ ____                           " << endl;
