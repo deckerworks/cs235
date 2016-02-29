@@ -48,7 +48,7 @@ bool station::addToStack() {
 	//we will only be using the left_functions for the stacks
 	//cout << "Attempting to add --" << car << "-- to stack" << endl;
 	
-	if (current_car == NCAR || stack.Capacity() == 6){
+	if (current_car == NCAR || stack.Capacity() == 5){
 		cout << "Station empty or STACK full!" << endl;
 		//cout << "NO CAR ADDED--STATION EMPTY" << endl;
 		return false;
@@ -98,7 +98,7 @@ int station::showSizeOfStack() {
 //Part 3--------------------------------------------------------------
 bool station::addToQueue() {
 	
-	if (current_car == NCAR || queue.Capacity() == 6){
+	if (current_car == NCAR || queue.Capacity() == 5){
 		cout << "Station empty or QUEUE full!" << endl;
 		return false;
 	}
@@ -147,7 +147,7 @@ int station::showSizeOfQueue() {
 
 bool station::addToDequeLeft() {
 	
-	if (current_car == NCAR || deque.Capacity() == 8){
+	if (current_car == NCAR || deque.Capacity() == 5){
 		cout << "Station empty or DEQUE full!" << endl;
 		return false;
 	}
@@ -161,7 +161,7 @@ bool station::addToDequeLeft() {
 
 bool station::addToDequeRight() {
 	
-	if (current_car == NCAR || deque.Capacity() == 8){
+	if (current_car == NCAR || deque.Capacity() == 5){
 		cout << "Station empty or DEQUE full!" << endl;
 		return false;
 	}
