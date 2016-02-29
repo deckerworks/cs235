@@ -85,7 +85,11 @@ int main() {
 				int id;
 				cout << "What car would you like to remove? ";
 				cin >> id;
-				if (train_station->showCurrentCar() == -1) {
+				if (cin.fail()){
+					cout << "Invalid ID" << endl;
+					break;
+				}
+				else if (train_station->showCurrentCar() == -1) {
 					if (id == train_station->showTopOfStack()){
 						train_station->removeFromStack();
 						cout << "Train removed from Stack and placed in Station!" << endl;

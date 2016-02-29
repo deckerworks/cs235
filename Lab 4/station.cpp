@@ -117,7 +117,7 @@ bool station::removeFromQueue() {
 		return false;
 	}
 	else {
-		current_car = queue.show_right();
+		current_car = queue.show_left();
 		queue.dequeue_left();
 		return true;
 	}
