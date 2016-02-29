@@ -7,47 +7,46 @@ using namespace std;
 
 template<class T> class l_deque {
 public:
-	l_deque() : front(NULL), back(NULL), capacity(0) {};
+	l_deque() : head(NULL), tail(NULL), capacity(0) {};
 
 	void enqueue_right(T data) {
-		node* insert = new node(data, NULL, back);
+		node* insert = new node(data, NULL, tail);
 
-		if (back != NULL)
-			back->next = insert;
+		if (tail != NULL)
+			tail->next = insert;
 
-		back = insert;
-		if (front == NULL)
-			front = insert;
+		tail = insert;
+		if (head == NULL)
+			head = insert;
 
 		capacity++;
 	};
 
 
 	void enqueue_left(T data) {
-		node* insert = new node(data, front, NULL);
+		node* insert = new node(data, head, NULL);
 
-		if (front != NULL)
-			front->prev = insert;
+		if (head != NULL)
+			head->prev = insert;
 
-		front = insert;
-		if (back == NULL)
-			back = insert;
+		head = insert;
+		if (tail == NULL)
+			tail = insert;
 
 		capacity++;
 	};
 
 	void dequeue_right() {
-		if (back != NULL) {
+		if (tail != NULL) {
 			if (capacity == 1){
-				node* temp = back;
-				back = temp->prev;
-				front = NULL;
+				node* temp = tail;
+				tail = temp->prev;
+				tail = NULL;
 				delete temp;
 			}
-			else {
-				node* temp = back;
-				back = back->prev;
-				back->next = NULL;
+			else{
+				node* temp = tail;
+				tail = tail->prev;
 				delete temp;
 			}
 			capacity--;
@@ -56,16 +55,16 @@ public:
 
 
 	void dequeue_left() {
-		if (front != NULL) {
+		if (head != NULL) {
 			if (capacity == 1){
-				node* temp = front;
-				front = temp->next;
-				front = NULL;
+				node* temp = head;
+				head = temp->next;
+				head = NULL;
 				delete temp;
 			}
 			else{
-				node* temp = front;
-				front = front->next;
+				node* temp = head;
+				head = head->next;
 				delete temp;
 			}
 			capacity--;
@@ -78,7 +77,7 @@ public:
 	};
 
 	void erase() {
-		node* cur = front;
+		node* cur = head;
 		node* temp;
 
 		while (cur != NULL)
@@ -89,14 +88,14 @@ public:
 			temp = NULL;
 		}
 
-		front = NULL;
-		back = NULL;
+		head = NULL;
+		tail = NULL;
 		capacity = 0;
 
 	};
 
 	bool contains(T data) {
-		node* temp = front;
+		node* temp = head;
 
 		//search until we find if the data is in the queue
 		while (temp != NULL)
@@ -117,7 +116,7 @@ public:
 		}
 		//print out the data
 		else {
-			node* temp = front;
+			node* temp = head;
 			while (temp != NULL) {
 				cout << temp->data << endl;
 				temp = temp->next;
@@ -130,11 +129,11 @@ public:
 	}
 	
 	T show_left () {
-		return front->data;
+		return head->data;
 	}
 	
 	T show_right() {
-		return back->data;
+		return tail->data;
 	}
 
 
@@ -151,8 +150,8 @@ private:
 		virtual ~node() {};
 	};
 	
-	node* front;
-	node* back;
+	node* head;
+	node* tail;
 	int capacity;	
 
 };

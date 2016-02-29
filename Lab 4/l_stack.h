@@ -7,32 +7,32 @@ using namespace std;
 
 template<class T> class l_stack {
 public:
-	l_stack() : front(NULL), back(NULL), capacity(0) {};
+	l_stack() : head(NULL), tail(NULL), capacity(0) {};
 
 	void enqueue_left(T data) {
-		node* insert = new node(data, front, NULL);
+		node* insert = new node(data, head, NULL);
 
-		if (front != NULL)
-			front->prev = insert;
+		if (head != NULL)
+			head->prev = insert;
 
-		front = insert;
-		if (back == NULL)
-			back = insert;
+		head = insert;
+		if (tail == NULL)
+			tail = insert;
 
 		capacity++;
 	};
 
 	void dequeue_left() {
-		if (front != NULL) {
+		if (head != NULL) {
 			if (capacity == 1){
-				node* temp = front;
-				front = temp->next;
-				front = NULL;
+				node* temp = head;
+				head = temp->next;
+				head = NULL;
 				delete temp;
 			}
 			else{
-				node* temp = front;
-				front = front->next;
+				node* temp = head;
+				head = head->next;
 				delete temp;
 			}
 			capacity--;
@@ -45,7 +45,7 @@ public:
 	};
 
 	void erase() {
-		node* cur = front;
+		node* cur = head;
 		node* temp;
 
 		while (cur != NULL)
@@ -56,14 +56,14 @@ public:
 			temp = NULL;
 		}
 
-		front = NULL;
-		back = NULL;
+		head = NULL;
+		tail = NULL;
 		capacity = 0;
 
 	};
 
 	bool contains(T data) {
-		node* temp = front;
+		node* temp = head;
 
 		//search until we find if the data is in the queue
 		while (temp != NULL)
@@ -84,7 +84,7 @@ public:
 		}
 		//print out the data
 		else {
-			node* temp = front;
+			node* temp = head;
 			while (temp != NULL) {
 				cout << temp->data << endl;
 				temp = temp->next;
@@ -97,11 +97,11 @@ public:
 	}
 	
 	T show_left () {
-		return front->data;
+		return head->data;
 	}
 	
 	T show_right() {
-		return back->data;
+		return tail->data;
 	}
 
 
@@ -118,8 +118,8 @@ private:
 		virtual ~node() {};
 	};
 	
-	node* front;
-	node* back;
+	node* head;
+	node* tail;
 	int capacity;	
 
 };

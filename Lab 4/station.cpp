@@ -235,7 +235,7 @@ int station::showSizeOfDeque() {
 
 bool station::is_not_dupe(int id) {
 	
-	bool unique;
+	//bool unique;
 
 	// Check all three containers
 	if(stack.contains(id)){
