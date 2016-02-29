@@ -104,7 +104,7 @@ bool station::addToQueue() {
 		return false;
 	}
 	else {
-		queue.enqueue_left(current_car);
+		queue.enqueue_right(current_car);
 		current_car = NCAR;
 		return true;
 	}
@@ -119,7 +119,7 @@ bool station::removeFromQueue() {
 	}
 	else {
 		current_car = queue.show_right();
-		queue.dequeue_right();
+		queue.dequeue_left();
 		return true;
 	}
 };

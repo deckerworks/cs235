@@ -1,6 +1,7 @@
 #include "StationInterface.h"
 #include "l_deque.h"
-
+#include "l_stack.h"
+#include "l_queue.h"
 class station : public StationInterface
 {
 public:
@@ -49,8 +50,8 @@ public:
 
 private:
 
-	l_deque<int> stack;
-	l_deque<int> queue;
+	l_stack<int> stack;
+	l_queue<int> queue;
 	l_deque<int> deque;
 	static const int NCAR = -1;
 	int current_car;

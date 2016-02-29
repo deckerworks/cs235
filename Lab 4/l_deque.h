@@ -38,14 +38,18 @@ public:
 
 	void dequeue_right() {
 		if (back != NULL) {
-			node* temp = back;
-
-			back = back->prev;
-			back->next = NULL;
-
-			delete temp;
-			temp = NULL;
-
+			if (capacity == 1){
+				node* temp = back;
+				back = temp->prev;
+				front = NULL;
+				delete temp;
+			}
+			else {
+				node* temp = back;
+				back = back->prev;
+				back->next = NULL;
+				delete temp;
+			}
 			capacity--;
 		}
 	};
@@ -53,12 +57,17 @@ public:
 
 	void dequeue_left() {
 		if (front != NULL) {
-			node* temp = front;
-			front = front->next;
-
-			delete temp;
-			temp = NULL;
-
+			if (capacity == 1){
+				node* temp = front;
+				front = temp->next;
+				front = NULL;
+				delete temp;
+			}
+			else{
+				node* temp = front;
+				front = front->next;
+				delete temp;
+			}
 			capacity--;
 		}
 	};
