@@ -82,6 +82,39 @@ int main() {
 				
 				break;
 			case 4: 
+				int id;
+				cout << "What car would you like to remove? ";
+				cin >> id;
+				if (train_station->showCurrentCar() == -1) {
+					if (id == train_station->showTopOfStack()){
+						train_station->removeFromStack();
+						cout << "Train removed from Stack and placed in Station!" << endl;
+					}
+					else if(id == train_station->showTopOfDequeLeft()) {
+						train_station->removeFromDequeLeft();
+						cout << "Train removed from Deque (Left) and placed in Station!" << endl;
+					}
+					else if(id == train_station->showTopOfDequeRight()) {
+						train_station->removeFromDequeRight();
+						cout << "Train removed from Deque (Right) and placed in Station!" << endl;
+					}
+					else if(id == train_station->showTopOfQueue()) {
+						train_station->removeFromQueue();
+						cout << "Train removed from Stack and placed in Station!" << endl;
+					}
+					else {
+						cout << "Train id not accessible!" << endl;
+					}
+					
+				}
+				else {
+					cout << "The station already has a car!" << endl;
+					break;
+				}
+				
+				break;
+				
+				/*
 				cout << "Where are we removing the train from?" << endl;
 				cout << "1: Stack" << endl;
 				cout << "2: Deque left" << endl;
@@ -113,6 +146,7 @@ int main() {
 				}
 			
 				break;
+				*/
 
 			case 5:
 				cout << "Accessable cars: " << endl;
