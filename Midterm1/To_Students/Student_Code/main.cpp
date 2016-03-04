@@ -4,23 +4,25 @@
 #include <deque>
 #include <time.h>
 #include <stdlib.h>
+#include <cmath>
 #include "Factory.h"
 #include "CircularDLLInterface.h"
 
 using namespace std;
 
 //shuffle the deque randomly
-void shuffle(deque<string>& names)
+/*
+void shuffle(CircularDLLInterface* names)
 {
 	//return if the size of the deque is too small
-	if (names.size() <= 1) {
+	if (names->size() <= 1) {
 		return;
 	}
 
 	int i, index;
 	string tmp;
 	srand(time(NULL));
-	int n = names.size();
+	int n = names->size();
 	for (i = n - 1; i>0; i--)
 	{
 		index = rand() % (i + 1);
@@ -29,16 +31,29 @@ void shuffle(deque<string>& names)
 		names[index] = tmp;
 	}
 }
+*/
+void calc_Safe_Index() {
+    cout << "Two numbers: ";
+    int number;
+    int second_number;
+    
+    cin >> number >> second_number;
+    cout << number % second_number;
+    
+    
+}
 
 int main() {
     
     bool menu_display = true;
+    bool indexcheck = true;
     int menu_choice;
     ifstream in_file;
     string file_name;
     string name;
     int index;
-    deque<string> band;
+    int num_people;
+    CircularDLLInterface* band = Factory::getStudentList();	
     
     while(menu_display) {
         
@@ -62,13 +77,13 @@ int main() {
                 cin >> file_name;
                 in_file.open(file_name.c_str());
                 if (in_file.is_open()) {
-                    if (band.size() > 0)
-                        band.clear();
+                    if (band->size() > 0)
+                        band->clear();
                     while(!in_file.eof()){
                     getline(in_file, name);
                     
                     if (name != "")
-                        band.push_back(name);
+                        band->insertTail(name);
                     else
                         cout << "EMPTY LINE" << endl;
                     }
@@ -82,72 +97,83 @@ int main() {
                 break;
                 
             case 2: 
+                cout << "DISPLAY!" << endl;
+                //band->display();
+                /*
                 if (band.size() == 0) {
                     cout << "Band is empty! Please insert names before display!\n" << endl;
                 }
                 else{
                     
                     for (int i = 0; i < band.size(); i++)
-                        cout << i <<" Name: " << band[i] << endl;
+                        cout << "[" << i <<"] - " << band[i] << endl;
                     cout << endl;
                 }
+                */
                 break;
                 
             case 3: 
                 cout << "Name to enter: ";
                 cin >> name;
-                
-                if (band.size() == 0) {
-                    band.push_front(name);
-                }
-                else{
-                    for (int i = 0; i < band.size(); i++){
-                        if (band[i] == name) {
-                            cout << "NAME ALREADY IN ROSTER\n" << endl;
-                            break;
-                        }
-                    }
-                    cout << "inserting at beginning!\n" << endl;
-                    band.push_front(name);
-                }
+                band->insertHead(name);
                 break;
 
             case 4: 
                 cout << "Name to enter: ";
                 cin >> name;
-                if (band.size() == 0) {
-                    band.push_back(name);
-                }
-                else{
-                    for (int i = 0; i < band.size(); i++){
-                        if (band[i] == name) {
-                            cout << "NAME ALREADY IN ROSTER\n" << endl;
-                            break;
-                        }
-                    }
-                    cout << "inserting at ending!\n" << endl;
-                    band.push_back(name);
-                }
+                band->insertTail(name);
                 break;
 
             case 5: 
-                if (band.size() == 0) {
+                if (band->size() == 0) {
                     cout << "Band is empty! Insert names before removing!\n" << endl; 
                 }
                 else {
                     cout << "Index of name to remove: ";
                     cin >> index;
-                    band.erase(band.begin() + index);
+                    //band.erase(band.begin() + index);
                 }
                 break;
             
             case 6: 
-                shuffle(band);
+                //shuffle(band);
+                cout << "Shuffling!" << endl;
                 break;
             
-            case 7: break;
+            case 7: 
+                cout << "Number of people in circle: ";
+                cin >> num_people;
+                
+                while(indexcheck){
+                    cout << "Counting number: ";
+                    cin >> index;
+                    
+                    if (index == 0) {
+                        cout << "Index must be larger than 0" << endl;
+                    }
+                    else if (abs(index) > num_people){
+                       cout << "Index must be less than the number of people" << endl;
+                    }
+                    else if (abs(index) < num_people){
+                        break;
+                    }
+                }
+                
+                cout << "Number of people in circle: " << num_people << "\nCounting number: " << index << endl;
+                
+                cout << "now calculating safe index...\n\n" << endl;
+                
+                calc_Safe_Index();
+                
+                
+                
+                break;
             
-            case 8: break;
+            case 8: 
+                cout << "Counting number: ";
+                cin >> index;
+                
+                break;
             
             case 9: cout << "BYE FELICIA\n" << endl; menu_display = false; break;
             

@@ -1,6 +1,5 @@
 #ifndef Template_LL_H_
 #define Template_LL_H_
-
 #include <iostream>
 
 using namespace std;
@@ -9,7 +8,7 @@ template<class T> class Template_LL {
 public:
 	Template_LL() : head(NULL), tail(NULL), capacity(0) {};
 
-	void insert_right(T data) {
+	void insert_tail(T data) {
 		node* insert = new node(data, NULL, tail);
 
 		if (tail != NULL)
@@ -23,7 +22,7 @@ public:
 	};
 
 
-	void insert_left(T data) {
+	void insert_head(T data) {
 		node* insert = new node(data, head, NULL);
 
 		if (head != NULL)
@@ -36,7 +35,7 @@ public:
 		capacity++;
 	};
 
-	void remove_right() {
+	void remove_tail() {
 		if (tail != NULL) {
 			if (capacity == 1){
 				node* temp = tail;
@@ -55,7 +54,7 @@ public:
 	};
 
 
-	void remove_left() {
+	void remove_head() {
 		if (head != NULL) {
 			if (capacity == 1){
 				node* temp = head;
@@ -73,17 +72,17 @@ public:
 		}
 	};
 	
-	void insertAfter(T value, T insertionNode){
+	void insertAfter(T value, T insertionnode){
 
     	bool dup = contains(value);
-    	bool is_there = !contains(insertionNode);
+    	bool is_there = !contains(insertionnode);
         if (dup && is_there){
-            Node* temp = head;
-            //advance to insertionNode
-            while (temp->data != insertionNode){
+            node* temp = head;
+            //advance to insertionnode
+            while (temp->data != insertionnode){
                 temp=temp->next;
             }
-            Node* insert = new Node(value, temp->next);
+            node* insert = new node(value, temp->next);
             temp->next = insert;
             temp = NULL;
             insert = NULL;
@@ -132,7 +131,7 @@ public:
 	void remove(T data){
 
         if (!contains(data)){
-            Node* temp = head;
+            node* temp = head;
 
             if (data == temp->data){
                 head = temp->next;
@@ -144,7 +143,7 @@ public:
                 temp = temp->next;
             }
 
-            Node* curr = temp->next;
+            node* curr = temp->next;
                 if (curr == NULL)
                     temp->next = NULL;
                 else
@@ -170,14 +169,13 @@ public:
             cout << "Index must exist! (empty list)" << endl;
         }
         else {
-            Node* temp = head;
+            node* temp = head;
 			for(int i = 0; i < index; i++){
 				temp = temp->next;
 			}
 			return temp->data;
         }
     };
-    
     
     void display() {
 		//check to make sure there is data
@@ -200,11 +198,11 @@ public:
     
     
     /*
-	T show_left () {
+	T show_head () {
 		return head->data;
 	}
 	
-	T show_right() {
+	T show_tail() {
 		return tail->data;
 	}
 	*/

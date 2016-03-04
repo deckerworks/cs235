@@ -10,7 +10,7 @@ using namespace std;
 
 class CircularDLL : public CircularDLLInterface {
 public:
-	CircularDLL() : head(NULL), tail(NULL), capacity(0);
+	CircularDLL(){};
 	virtual ~CircularDLL(){
 		circle_list.erase();
 	};
@@ -22,8 +22,9 @@ public:
 	virtual bool removeAt(int index);
 	virtual void clear();
 	virtual int size();
+	virtual void display();
 	virtual string at(int index);
 private:
 	Template_LL<string> circle_list;
-
-}
+	virtual bool contains(string data);
+};
