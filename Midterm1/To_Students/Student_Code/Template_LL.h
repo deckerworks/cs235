@@ -82,8 +82,9 @@ public:
             while (temp->data != insertionnode){
                 temp=temp->next;
             }
-            node* insert = new node(value, temp->next);
+            node* insert = new node(value);
             temp->next = insert;
+			//temp->next->prev = temp;
             temp = NULL;
             insert = NULL;
             capacity++;
@@ -130,7 +131,7 @@ public:
 
 	void remove(T data){
 
-        if (!contains(data)){
+        if (contains(data)){
             node* temp = head;
 
             if (data == temp->data){
@@ -139,9 +140,9 @@ public:
             }
             else{
                 //advance to node before node to delete
-            while(temp->next != NULL && temp->next->data != data){
-                temp = temp->next;
-            }
+				while(temp->next != NULL && temp->next->data != data){
+					temp = temp->next;
+				}
 
             node* curr = temp->next;
                 if (curr == NULL)
@@ -193,7 +194,7 @@ public:
 	};
     
     int Capacity() {
-		return capacity;
+		return this->capacity;
 	}
     
     

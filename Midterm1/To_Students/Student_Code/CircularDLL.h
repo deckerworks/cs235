@@ -11,20 +11,20 @@ using namespace std;
 class CircularDLL : public CircularDLLInterface {
 public:
 	CircularDLL(){};
-	virtual ~CircularDLL(){
+	~CircularDLL(){
 		circle_list.erase();
 	};
-	virtual bool insertHead(string name);
-	virtual bool insertTail(string name);
-	virtual bool insertAt(string name, int index) ;
-	virtual bool removeHead();
-	virtual bool removeTail();
-	virtual bool removeAt(int index);
-	virtual void clear();
-	virtual int size();
-	virtual void display();
-	virtual string at(int index);
+	bool insertHead(string name);
+	bool insertTail(string name);
+	bool insertAt(string name, int index) ;
+	bool removeHead();
+	bool removeTail();
+	bool removeAt(int index);
+	void clear();
+	int size();
+	void display();
+	string at(int index);
 private:
 	Template_LL<string> circle_list;
-	virtual bool contains(string data);
+	bool contains(string data);
 };

@@ -5,42 +5,52 @@
 #include <time.h>
 #include <stdlib.h>
 #include <cmath>
+#include <vector>
 #include "Factory.h"
 #include "CircularDLLInterface.h"
+#include "CircularDLL.h"
 
 using namespace std;
 
-//shuffle the deque randomly
-/*
-void shuffle(CircularDLLInterface* names)
-{
-	//return if the size of the deque is too small
-	if (names->size() <= 1) {
+
+
+void shuffle(vector<string>& r_names) {
+	//return if the size of the vector is too small
+	if (r_names.size() <= 1) {
 		return;
 	}
 
 	int i, index;
 	string tmp;
 	srand(time(NULL));
-	int n = names->size();
+	int n = r_names.size();
 	for (i = n - 1; i>0; i--)
 	{
 		index = rand() % (i + 1);
-		tmp = names[i];
-		names[i] = names[index];
-		names[index] = tmp;
+		tmp = r_names[i];
+		r_names[i] = r_names[index];
+		r_names[index] = tmp;
 	}
 }
-*/
-void calc_Safe_Index() {
-    cout << "Two numbers: ";
-    int number;
-    int second_number;
-    
-    cin >> number >> second_number;
-    cout << number % second_number;
-    
-    
+
+
+void calc_Safe_Index(CircularDLL* roster, int n, int c) {
+
+	int s = 1;
+	int index = 0;
+	if (c < 0) {
+		c = abs(c);
+	}
+	while (roster->size() > s)
+	{	
+		index += c - 1;
+		if (index >= roster->size()) index %= roster->size();
+		//cout << roster->at(index) << ", ";
+		roster->removeAt(index);
+	}
+	cout << "\n" << endl;
+	cout << roster->at(0);
+	cout << "\n" << endl;
 }
 
 int main() {
@@ -48,16 +58,19 @@ int main() {
     bool menu_display = true;
     bool indexcheck = true;
     int menu_choice;
+	int roster_size;
     ifstream in_file;
     string file_name;
-    string name;
+    string name, safe_name;
     int index;
     int num_people;
-    CircularDLLInterface* band = Factory::getStudentList();	
+    CircularDLLInterface* band = Factory::getStudentList();
+	CircularDLL* temp_band = new CircularDLL();
+	vector<string> shuffled;
     
     while(menu_display) {
         
-        cout << "1. Import a file containing names to add to Josephus’ band" << endl;
+        cout << "1. Import a file containing names to add to Josephus' band" << endl;
         cout << "2. Display the band roster with indices" << endl;
         cout << "3. Prepend a name manually" << endl;
         cout << "4. Append a name manually" << endl;
@@ -68,27 +81,29 @@ int main() {
         cout << "9. Quit\n" << endl;
         
         cout << "User Selection: ";
-        cin >> menu_choice;
+        std::cin >> menu_choice;
         cout << endl;
         
         switch (menu_choice){
             case 1:
                 cout << "File name (including extension): ";
-                cin >> file_name;
-                in_file.open(file_name.c_str());
+                std::cin >> file_name;
+                in_file.open(file_name);
                 if (in_file.is_open()) {
+					//if the roster isn't empty, clear it and then insert names
                     if (band->size() > 0)
                         band->clear();
                     while(!in_file.eof()){
-                    getline(in_file, name);
+						getline(in_file, name);
                     
-                    if (name != "")
-                        band->insertTail(name);
-                    else
-                        cout << "EMPTY LINE" << endl;
-                    }
+						if (name != ""){
+							band->insertTail(name);
+							cout << name << " successfully added to roster" << endl;
+						}
+						else
+							cout << "EMPTY LINE" << endl;
+						}
                     in_file.close();
-                    
                 }
                 else {
                     cout << "File failed to open\n" << endl;
@@ -96,31 +111,28 @@ int main() {
                 cout << endl;
                 break;
                 
-            case 2: 
-                cout << "DISPLAY!" << endl;
-                //band->display();
-                /*
-                if (band.size() == 0) {
-                    cout << "Band is empty! Please insert names before display!\n" << endl;
-                }
-                else{
-                    
-                    for (int i = 0; i < band.size(); i++)
-                        cout << "[" << i <<"] - " << band[i] << endl;
-                    cout << endl;
-                }
-                */
+			case 2:
+				//display each member in the band
+
+				if (band->size() == 0) {
+					cout << "Roster is empty!" << endl;
+					break;
+				}
+				for (int i = 0; i < band->size(); i++) {
+					cout << "[" <<i << "] - " << band->at(i) << endl;
+				}
+				cout << endl;
                 break;
                 
             case 3: 
                 cout << "Name to enter: ";
-                cin >> name;
+				std::cin >> name;
                 band->insertHead(name);
                 break;
 
             case 4: 
                 cout << "Name to enter: ";
-                cin >> name;
+				std::cin >> name;
                 band->insertTail(name);
                 break;
 
@@ -130,23 +142,35 @@ int main() {
                 }
                 else {
                     cout << "Index of name to remove: ";
-                    cin >> index;
-                    //band.erase(band.begin() + index);
+					std::cin >> index;
+					band->removeAt(index);
                 }
                 break;
             
-            case 6: 
-                //shuffle(band);
-                cout << "Shuffling!" << endl;
+            case 6:
+				if (band->size() == 0) cout << "Roster is empty!\n\n"; break;
+
+                cout << "****Shuffling!****\n" << endl;
+
+				for (int i = 0; i < band->size(); i++) {
+					shuffled.push_back(band->at(i));
+				}
+				band->clear();
+				shuffle(shuffled);
+
+				for (int i = 0; i < shuffled.size(); i++) {
+					band->insertTail(shuffled[i]);
+				}
+				shuffled.clear();
                 break;
             
             case 7: 
                 cout << "Number of people in circle: ";
-                cin >> num_people;
+				std::cin >> num_people;
                 
                 while(indexcheck){
                     cout << "Counting number: ";
-                    cin >> index;
+					std::cin >> index;
                     
                     if (index == 0) {
                         cout << "Index must be larger than 0" << endl;
@@ -155,23 +179,58 @@ int main() {
                        cout << "Index must be less than the number of people" << endl;
                     }
                     else if (abs(index) < num_people){
+						indexcheck == false;
+						for (int i = 0; i < num_people; i++) {
+							name = "temp" + to_string(i);
+							temp_band->insertTail(name);
+						}
+
+						calc_Safe_Index(temp_band, num_people, index);
+						//safe_name = calc_Safe_Index(temp_band, num_people, index);
+						cout << safe_name << endl;
+						temp_band->clear();
                         break;
                     }
                 }
-                
-                cout << "Number of people in circle: " << num_people << "\nCounting number: " << index << endl;
-                
-                cout << "now calculating safe index...\n\n" << endl;
-                
-                calc_Safe_Index();
-                
-                
-                
                 break;
             
-            case 8: 
-                cout << "Counting number: ";
-                cin >> index;
+            case 8:
+				while (indexcheck) {
+					cout << "Counting number: ";
+					std::cin >> index;
+
+					if (index == 0) {
+						cout << "Index must be larger than 0" << endl;
+					}
+					else if (abs(index) > band->size()) {
+						cout << "Index must be less than the number of people" << endl;
+					}
+					else if (abs(index) < band->size()) {
+						indexcheck == false;
+
+						if (index < 0) {
+							temp_band->insertHead(band->at(0));
+							for (int i = band->size()-1; i > 0; i--) {
+								temp_band->insertTail(band->at(i));
+							}
+						}
+
+						else {
+							for (int i = 0; i < band->size(); i++) {
+								temp_band->insertTail(band->at(i));
+							}
+						}
+
+						calc_Safe_Index(temp_band, band->size(), index);
+						//safe_name = calc_Safe_Index(temp_band, num_people, index);
+						//cout << safe_name << endl;
+						temp_band->clear();
+						break;
+					}
+				}
+
+
+
                 
                 break;
             
@@ -183,8 +242,8 @@ int main() {
             //cin.clear();
         }
         
-        cin.clear();
-		cin.ignore(100000, '\n');
+		std::cin.clear();
+		std::cin.ignore(100000, '\n');
         
         
     }
