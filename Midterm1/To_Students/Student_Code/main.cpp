@@ -271,6 +271,7 @@ int main() {
 
 					cout << endl;
 					temp_band->clear();
+					band->clear();
 					break;
 				}
 			}
