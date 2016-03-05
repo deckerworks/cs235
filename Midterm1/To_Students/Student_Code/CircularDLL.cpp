@@ -64,7 +64,7 @@ bool CircularDLL::removeAt(int index) {
 	}
 	string name = circle_list.at(index);
 	circle_list.remove(name);
-	cout << name << " was removed from roster" << endl;
+	//cout << name << " was removed from roster" << endl;
 	return true;
 };
 
