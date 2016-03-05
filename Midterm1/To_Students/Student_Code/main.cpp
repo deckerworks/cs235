@@ -160,7 +160,7 @@ int main() {
 			//display each member in the band
 
 			if (band->size() == 0) {
-				cout << "Roster is empty!" << endl;
+				cout << "Roster is empty!\n" << endl;
 				break;
 			}
 			for (int i = 0; i < band->size(); i++) {
@@ -239,6 +239,11 @@ int main() {
 			break;
 
 		case 8:
+		
+			if (band->size() == 0) {
+				cout << "Roster is empty!\n\n";
+				break;
+			}
 			while (indexcheck) {
 				cout << "Counting number: ";
 				std::cin >> index;
