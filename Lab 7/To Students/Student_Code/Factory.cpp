@@ -1,4 +1,6 @@
 #include "Factory.h"
+#include "GPAInterface.h"
+#include "GPA.h"
 //You may add #include statements here
 
 /*
@@ -15,5 +17,5 @@
 */
 GPAInterface * Factory::getGPA()
 {
-	return NULL;//Modify this line
+	return new GPA();//Modify this line
 }
