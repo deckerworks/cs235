@@ -1,4 +1,5 @@
 #include "Factory.h"
+#include "AVL.h"
 //You may add #include statements here
 
 /*
@@ -15,5 +16,5 @@
 */
 AVLInterface * Factory::getAVL()
 {
-	return NULL;//Modify this line
+	return new AVL();//Modify this line
 }
